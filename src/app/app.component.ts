@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export interface post{
 
   tittel : string,
@@ -8,16 +8,28 @@ export interface post{
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
  
   posts:post[] =[
     { tittel:'как дела',text:'ето я ',id :12},
     { tittel:'Привет',text:'ето он ',id :2}
     ]
-    updatepost(post:post){
-     this.posts.unshift(post )
+    ngOnInit(): void {
+      setTimeout(()=>{
+        console.log('timeout')
+        this.posts[0]={
+          tittel:'change',
+          text:'change2',
+          id:22
+        }
+        
+      },5000)
+    }
+    updatepost(posts:post){
+     this.posts.unshift(posts )
   
    
     }

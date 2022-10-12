@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { post } from '../app.component';
 
 @Component({
@@ -7,7 +7,10 @@ import { post } from '../app.component';
   styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent  {
- @Output () onAdd:EventEmitter<post> =new EventEmitter<post>()
+ @Output () onAdd:EventEmitter<post> =new EventEmitter<post>() //працюэ зовнi
+ @ViewChild("tittelInpute")
+  child!: ElementRef;
+ 
   tittel=''
   text=''
   addPost() {
@@ -21,5 +24,10 @@ export class PostFormComponent  {
       this.onAdd.emit (post)
       this.text = this.tittel = ''
     }
+   
+  }
+  FocusTittel (){
+   this.child?.nativeElement.focus()
+   console.log(this.child)
   }
 }
